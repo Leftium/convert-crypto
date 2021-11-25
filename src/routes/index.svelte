@@ -1,4 +1,10 @@
+<svelte:head>
+    <link href='/fa/css/all.css' rel='stylesheet'>
+</svelte:head>
+
 <script lang="coffee">
+    import ClipboardInput from '$lib/components/ClipboardInput.svelte'
+
     console.log 'CoffeeScript!'
 
     `let query = ''`
@@ -13,4 +19,7 @@
 
 <input bind:value={query}>
 
-<p>{satoshiFromBtc(query)} SAT &#8678; BTC</p>
+
+<div>
+    <ClipboardInput label='BTC&#8680;SAT' value='{satoshiFromBtc(query)}'></ClipboardInput>
+</div>
