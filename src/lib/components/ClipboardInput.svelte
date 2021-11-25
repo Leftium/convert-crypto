@@ -1,3 +1,5 @@
+<svelte:options accessors={true} />
+
 <script type='text/coffeescript'>
     export value = null
     export label = null
