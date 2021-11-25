@@ -17,6 +17,43 @@
 
 
 <style>
+input, button, select, textarea {
+    font-family: inherit;
+    font-size: inherit;
+    padding: 0.4em;
+    margin: 0 0 0.5em 0;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 2px;
+}
+
+input:disabled {
+    color: #ccc;
+}
+
+input[type="range"] {
+    height: 0;
+}
+
+button {
+    color: #333;
+    background-color: #f4f4f4;
+    outline: none;
+}
+
+button:disabled {
+    color: #999;
+}
+
+button:not(:disabled):active {
+    background-color: #ddd;
+}
+
+button:focus {
+    border-color: #666;
+}
+
+
 button {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
@@ -74,5 +111,3 @@ input {
            value={value}
            on:focus={handleFocus}>
 </div>
-
-
