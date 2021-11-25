@@ -1,7 +1,16 @@
 <script lang="coffee">
     console.log 'CoffeeScript!'
+
+    `let query = ''`
+
+    satoshiFromBtc = (q) ->
+        v = parseFloat (q or 1), 10
+        (v * 1_000_000_000).toLocaleString()
+
+
 </script>
 
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<input bind:value={query}>
+
+<p>{satoshiFromBtc(query)} SAT &#8678; BTC</p>
