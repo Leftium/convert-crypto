@@ -19,7 +19,9 @@ const config = {
     },
   },
 
-  preprocess: [preprocess({})],
+  preprocess: [preprocess({
+      "coffeescript": { "bare": true }
+  })],
 };
 
 export default config;
