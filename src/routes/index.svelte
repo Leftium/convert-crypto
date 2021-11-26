@@ -2,7 +2,7 @@
     <link href='/fa/css/all.css' rel='stylesheet'>
 </svelte:head>
 
-<script context="module" lang="coffee">
+<script context="module" type="text/coffeescript">
     _load = ({page, fetch, session, stuff}) =>
         response = await fetch 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,krw'
         return response.json().then (data) -> return
@@ -12,7 +12,7 @@
     `export const load = _load`
 </script>
 
-<script lang="coffee">
+<script type="text/coffeescript">
     # Props from load()
     `export let satsPerUsd`
     `export let satsPerKrw`
