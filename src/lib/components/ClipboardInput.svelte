@@ -19,7 +19,7 @@
 
 
 <style>
-input, button, select, textarea {
+input, button {
     font-family: inherit;
     font-size: inherit;
     padding: 0.4em;
@@ -31,10 +31,6 @@ input, button, select, textarea {
 
 input:disabled {
     color: #ccc;
-}
-
-input[type="range"] {
-    height: 0;
 }
 
 button {

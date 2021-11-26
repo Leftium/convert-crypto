@@ -3,12 +3,13 @@
 </svelte:head>
 
 <script context="module" lang="coffee">
-    export load = ({page, fetch, session, stuff}) ->
+    _load = ({page, fetch, session, stuff}) ->
         response = await fetch 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,krw'
         return response.json().then (data) -> return
             props:
                 satsPerUsd: 100_000_000/data.bitcoin.usd
                 satsPerKrw: 100_000_000/data.bitcoin.krw
+    `export const load = _load`
 </script>
 
 <script lang="coffee">
@@ -52,7 +53,7 @@
         width: 110px;
     }
 
-    input, button, select, textarea {
+    input {
         font-family: inherit;
         font-size: inherit;
         padding: 0.4em;
@@ -60,9 +61,7 @@
         box-sizing: border-box;
         border: 1px solid #ccc;
         border-radius: 2px;
-    }
 
-    input {
         width: 100%;
         margin-top: 4px;
 
