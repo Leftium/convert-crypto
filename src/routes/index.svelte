@@ -33,30 +33,30 @@
 <svelte:body on:paste={handlePaste} />
 
 <div>
-    <input bind:this={inputQuery}
-           bind:value={query}
+    <input
+
            on:paste|preventDefault={nullHandler} />
 </div>
 
 <div class="results">
     <div>
         <ClipboardInput
-            bind:this={satoshiFromBtcComponent}
+
             label='BTC&#8680;SAT'
-            value={getSatoshiFromBtc(query)} />
+ />
     </div>
 
     <div>
         <ClipboardInput
-            bind:this={satoshiFromUsdComponent}
+
             label='USD&#8680;SAT'
-            value={getSatoshiFromUsd(query)} />
+ />
     </div>
 
     <div>
         <ClipboardInput
-            bind:this={satoshiFromKrwComponent}
+
             label='KRW&#8680;SAT'
-            value={getSatoshiFromKrw(query)} />
+ />
     </div>
 </div>
