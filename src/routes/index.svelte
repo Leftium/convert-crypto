@@ -3,7 +3,7 @@
 </svelte:head>
 
 <script context="module" lang="coffee">
-    _load = ({page, fetch, session, stuff}) ->
+    _load = ({page, fetch, session, stuff}) =>
         response = await fetch 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,krw'
         return response.json().then (data) -> return
             props:
