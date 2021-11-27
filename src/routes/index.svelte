@@ -21,9 +21,7 @@
 
     `let inputQuery = null`
     `let parsedQuery = null`
-    `let formattedParsedQuery = null`
-
-    `let formattedParsedQueryComponent = null`
+    `let formattedParsedQuery = {}`
 
     `let satoshiFromBtcComponent = null`
     `let satoshiFromUsdComponent = null`
@@ -44,7 +42,7 @@
         v = parseFloat(v, 10) or 1  # Default to value of 1
 
     `$: parsedQuery = parseQuery(query)`
-    `$: formattedParsedQuery = parsedQuery.toLocaleString()`
+    `$: formattedParsedQuery.s = parsedQuery.toLocaleString()`
 
     convertWithRate = (v, rate) ->
         v = v * rate
@@ -67,7 +65,7 @@
         if data
             inputQuery.value = query = data
             parsedQuery = parseQuery data
-            formattedParsedQueryComponent.textContent = parsedQuery.toLocaleString()
+            formattedParsedQuery.s = parsedQuery.toLocaleString()
 
             satoshiFromBtcComponent.value = getSatoshiFromBtc(parsedQuery)
             satoshiFromUsdComponent.value = getSatoshiFromUsd(parsedQuery)
@@ -117,8 +115,8 @@
            on:paste|preventDefault={nullHandler} />
 </div>
 
-<div bind:this={formattedParsedQueryComponent}>
-    {formattedParsedQuery}
+<div>
+    {formattedParsedQuery.s}
 </div>
 
 <div class="results">
