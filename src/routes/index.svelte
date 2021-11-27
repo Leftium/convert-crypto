@@ -29,9 +29,13 @@
     `let satoshiFromUsdComponent = null`
     `let satoshiFromKrwComponent = null`
 
-    `let hodlBotLowPriceComponent = null`
-    `let hodlBotHighPriceComponent = null`
+    `let hodlBotLowPriceComponent     = null`
+    `let hodlBotHighPriceComponent    = null`
     `let hodlBotTrailingDownComponent = null`
+
+    `let standardBotLowPriceComponent     = null`
+    `let standardBotHighPriceComponent    = null`
+    `let standardBotTrailingDownComponent = null`
 
     `export let query = ''`
 
@@ -54,6 +58,10 @@
     getHodlBotHighPrice    = (q) -> q * (1 + 0.0037*7)
     getHodlBotTrailingDown = (q) -> getHodlBotLowPrice(q) * 0.9
 
+    getStandardBotLowPrice     = (q) -> q * (1 - 0.3)
+    getStandardBotHighPrice    = (q) -> q * (1 + 0.2)
+    getStandardBotTrailingDown = (q) -> getStandardBotLowPrice(q) * 0.9
+
     handlePaste = (e) ->
         data = (event.clipboardData || window.clipboardData).getData('text');
         if data
@@ -68,6 +76,10 @@
             hodlBotLowPriceComponent.value     = getHodlBotLowPrice(parsedQuery)
             hodlBotHighPriceComponent.value    = getHodlBotHighPrice(parsedQuery)
             hodlBotTrailingDownComponent.value = getHodlBotTrailingDown(parsedQuery)
+
+            standardBotLowPriceComponent.value     = getStandardBotLowPrice(parsedQuery)
+            standardBotHighPriceComponent.value    = getStandardBotHighPrice(parsedQuery)
+            standardBotTrailingDownComponent.value = getStandardBotTrailingDown(parsedQuery)
 
     nullHandler = (e) -> console.log '(nullHandler)'
 
@@ -155,6 +167,30 @@
                 bind:this={hodlBotTrailingDownComponent}
                 label='Trailing Down'
                 value={getHodlBotTrailingDown(parsedQuery)} />
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>Standard Bot</legend>
+        <div>
+            <ClipboardInput
+                bind:this={standardBotLowPriceComponent}
+                label='Low Price'
+                value={getStandardBotLowPrice(parsedQuery)} />
+        </div>
+
+        <div>
+            <ClipboardInput
+                bind:this={standardBotHighPriceComponent}
+                label='High Price'
+                value={getStandardBotHighPrice(parsedQuery)} />
+        </div>
+
+        <div>
+            <ClipboardInput
+                bind:this={standardBotTrailingDownComponent}
+                label='Trailing Down'
+                value={getStandardBotTrailingDown(parsedQuery)} />
         </div>
     </fieldset>
 
