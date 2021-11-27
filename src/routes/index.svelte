@@ -20,15 +20,23 @@
     import ClipboardInput from '$lib/components/ClipboardInput.svelte'
 
     `let inputQuery = null`
+    `let parsedQuery = null`
+    `let formattedParsedQuery = null`
+
     `let satoshiFromBtcComponent = null`
     `let satoshiFromUsdComponent = null`
     `let satoshiFromKrwComponent = null`
 
     `export let query = ''`
 
-    convertWithRate = (q, rate) ->
-        q = q.replace /[^0-9.]/g, ''
-        v = parseFloat(q, 10) or 1  # Default to value of 1
+    parseQuery = (q) ->
+        v = q.replace /[^0-9.]/g, ''
+        v = parseFloat(v, 10) or 1  # Default to value of 1
+
+    `$: parsedQuery = parseQuery(query)`
+    `$: formattedParsedQuery = parsedQuery.toLocaleString()`
+
+    convertWithRate = (v, rate) ->
         v = v * rate
         v.toLocaleString()
 
@@ -40,9 +48,10 @@
         data = (event.clipboardData || window.clipboardData).getData('text');
         if data
             inputQuery.value = query = data
-            satoshiFromBtcComponent.value = getSatoshiFromBtc(query)
-            satoshiFromUsdComponent.value = getSatoshiFromUsd(query)
-            satoshiFromKrwComponent.value = getSatoshiFromKrw(query)
+            parsedQuery = parseQuery data
+            satoshiFromBtcComponent.value = getSatoshiFromBtc(parsedQuery)
+            satoshiFromUsdComponent.value = getSatoshiFromUsd(parsedQuery)
+            satoshiFromKrwComponent.value = getSatoshiFromKrw(parsedQuery)
 
     nullHandler = (e) -> console.log '(nullHandler)'
 
@@ -80,25 +89,29 @@
            on:paste|preventDefault={nullHandler} />
 </div>
 
+<div>
+    {formattedParsedQuery}
+</div>
+
 <div class="results">
     <div>
         <ClipboardInput
             bind:this={satoshiFromBtcComponent}
             label='BTC&#8680;SAT'
-            value={getSatoshiFromBtc(query)} />
+            value={getSatoshiFromBtc(parsedQuery)} />
     </div>
 
     <div>
         <ClipboardInput
             bind:this={satoshiFromUsdComponent}
             label='USD&#8680;SAT'
-            value={getSatoshiFromUsd(query)} />
+            value={getSatoshiFromUsd(parsedQuery)} />
     </div>
 
     <div>
         <ClipboardInput
             bind:this={satoshiFromKrwComponent}
             label='KRW&#8680;SAT'
-            value={getSatoshiFromKrw(query)} />
+            value={getSatoshiFromKrw(parsedQuery)} />
     </div>
 </div>
